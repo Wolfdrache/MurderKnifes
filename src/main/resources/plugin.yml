@@ -1,0 +1,7 @@
+name: MurderKnifes
+version: ${project.version}
+main: com.wolfdrache.murderknifes.MurderKnifes
+api-version: 1.19
+description: A MurderKnifes plugin codeBase for Minecraft 1.19.3
+author: Wolfdrache
+depend: [Vault]
