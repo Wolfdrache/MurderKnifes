@@ -4,7 +4,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
 public class MessageHelper {
-    public static Component createComponent(String text) {
+    public Component createComponent(String text) {
         return LegacyComponentSerializer.legacySection().deserialize(text);
     }
 }
