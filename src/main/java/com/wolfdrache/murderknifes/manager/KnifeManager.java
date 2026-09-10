@@ -23,7 +23,7 @@ public class KnifeManager {
 
     private final NamespacedKey knifeKey = new NamespacedKey("murderknifes", "custom_knife");
     
-    private final List<Knife> knifes = new ArrayList<>();
+    public final List<Knife> knifes = new ArrayList<>();
 
     private final Map<Player, KnifePlayer> knifePlayers = new HashMap<>();
 

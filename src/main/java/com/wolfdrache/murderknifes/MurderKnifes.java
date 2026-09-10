@@ -8,6 +8,7 @@ import com.wolfdrache.murderknifes.listener.ProtectionListener;
 import com.wolfdrache.murderknifes.manager.CoinManager;
 import com.wolfdrache.murderknifes.manager.FileManager;
 import com.wolfdrache.murderknifes.manager.KnifeManager;
+import com.wolfdrache.murderknifes.ui.KnifeSelector;
 
 import net.milkbowl.vault.economy.Economy;
 
@@ -18,6 +19,8 @@ public class MurderKnifes extends JavaPlugin {
     private CoinManager coinManager;
     private FileManager fileManager;
     private KnifeManager knifeManager;
+
+    private KnifeSelector knifeSelector;
 
     @Override
     public void onEnable(){
@@ -31,6 +34,9 @@ public class MurderKnifes extends JavaPlugin {
         coinManager = new CoinManager(economy);
         knifeManager = new KnifeManager(fileManager); 
 
+        knifeSelector = new KnifeSelector(knifeManager, coinManager); 
+
+        getServer().getPluginManager().registerEvents(knifeSelector, this);
         getServer().getPluginManager().registerEvents(new ConnectionListener(knifeManager), this);
         getServer().getPluginManager().registerEvents(new ProtectionListener(knifeManager), this);
         

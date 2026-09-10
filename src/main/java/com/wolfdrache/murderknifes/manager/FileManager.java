@@ -18,13 +18,13 @@ import com.wolfdrache.murderknifes.models.Knife;
 import com.wolfdrache.murderknifes.models.KnifePlayer;
 
 public class FileManager {
-    private final MurderKnifes plugin;
+    // private final MurderKnifes plugin;
 
     private final File knifesFile;
     private final File playerKnifesFile;
 
     public FileManager(MurderKnifes plugin) {
-        this.plugin = plugin;
+        // this.plugin = plugin;
         this.knifesFile = new File(plugin.getDataFolder(), "knifes.yml");
         this.playerKnifesFile = new File(plugin.getDataFolder(), "playerKnifes.yml");
     }
@@ -76,7 +76,7 @@ public class FileManager {
         String playerId = player.getUniqueId().toString();
 
         config.set(playerId + ".name", player.getName());
-        
+
         List<Integer> favoriteKnifeNumbers = new ArrayList<>();
         for (Knife knife : knifePlayer.favoriteKnifes) {
             favoriteKnifeNumbers.add(knife.number);
