@@ -60,10 +60,15 @@ softdepend: [MurderKnifes]
 This project uses the following Maven coordinates:
 
 ```xml
+<repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+</repository>
+
 <dependency>
-    <groupId>com.wolfdrache</groupId>
+    <groupId>com.github.Wolfdrache</groupId>
     <artifactId>MurderKnifes</artifactId>
-    <version>1.0.0</version>
+    <version>-SNAPSHOT</version>
     <scope>provided</scope>
 </dependency>
 ```
