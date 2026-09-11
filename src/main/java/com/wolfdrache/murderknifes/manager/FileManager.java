@@ -9,11 +9,11 @@ import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import com.wolfdrache.murderknifes.MurderKnifes;
 import com.wolfdrache.murderknifes.models.Knife;
 import com.wolfdrache.murderknifes.models.KnifePlayer;
 
@@ -23,7 +23,7 @@ public class FileManager {
     private final File knifesFile;
     private final File playerKnifesFile;
 
-    public FileManager(MurderKnifes plugin) {
+    public FileManager(JavaPlugin plugin) {
         // this.plugin = plugin;
         this.knifesFile = new File(plugin.getDataFolder(), "knifes.yml");
         this.playerKnifesFile = new File(plugin.getDataFolder(), "playerKnifes.yml");
@@ -50,12 +50,9 @@ public class FileManager {
         String playerId = player.getUniqueId().toString();
         List<Integer> favoriteKnifeNumbers = config.getIntegerList(playerId + ".favoriteKnifes");
         Set<Knife> favoriteKnifes = new HashSet<>();
-        for (int number : favoriteKnifeNumbers) {
-            for (Knife knife : knifes) {
-                if (knife.number == number) {
-                    favoriteKnifes.add(knife);
-                    break;
-                }
+        for (Knife knife : knifes) {
+            if (favoriteKnifeNumbers.contains(knife.number) || knife.price == -1) {
+                favoriteKnifes.add(knife);
             }
         }
         List<Integer> boughtKnifeNumbers = config.getIntegerList(playerId + ".boughtKnifes");
@@ -85,6 +82,7 @@ public class FileManager {
 
         List<Integer> boughtKnifeNumbers = new ArrayList<>();
         for (Knife knife : knifePlayer.boughtKnifes) {
+            if (knife.price == -1) continue;
             boughtKnifeNumbers.add(knife.number);
         }
         config.set(playerId + ".boughtKnifes", boughtKnifeNumbers);

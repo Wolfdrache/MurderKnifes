@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -27,8 +28,11 @@ public class KnifeManager {
 
     private final Map<Player, KnifePlayer> knifePlayers = new HashMap<>();
 
+    private final Knife defaultKnife = new Knife("§cMesser", Material.IRON_SWORD, -1, -1);
+
     public KnifeManager(FileManager fileManager) {
         this.fileManager = fileManager;
+        this.knifes.add(defaultKnife);
         this.knifes.addAll(fileManager.loadKnifes());
     }
 
@@ -56,7 +60,7 @@ public class KnifeManager {
         KnifePlayer knifePlayer = getKnifePlayer(player);
         if (knifePlayer == null) return null;
         Knife knife = knifePlayer.getKnife();
-        if (knife == null) return null;
+        if (knife == null) knife = defaultKnife;
         return createKnifeItem(knife);
     }
 

@@ -5,3 +5,8 @@ api-version: 1.19
 description: A MurderKnifes plugin codeBase for Minecraft 1.19.3
 author: Wolfdrache
 depend: [Vault]
+
+permissions:
+  murderknifes.allKnifes:
+    description: Allows access to all knives.
+    default: false
