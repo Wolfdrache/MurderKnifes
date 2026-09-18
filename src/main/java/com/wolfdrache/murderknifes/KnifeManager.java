@@ -1,4 +1,4 @@
-package com.wolfdrache.murderknifes.manager;
+package com.wolfdrache.murderknifes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,13 +14,8 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
-import com.wolfdrache.murderknifes.helper.MessageHelper;
-import com.wolfdrache.murderknifes.models.Knife;
-import com.wolfdrache.murderknifes.models.KnifePlayer;
-
-public class KnifeManager {
+class KnifeManager {
     private final FileManager fileManager;
-    private final MessageHelper messageHelper = new MessageHelper();
 
     private final NamespacedKey knifeKey = new NamespacedKey("murderknifes", "custom_knife");
     
@@ -68,7 +63,7 @@ public class KnifeManager {
         ItemStack item = new ItemStack(knife.material);
         ItemMeta meta = item.getItemMeta();
         if (meta != null) {
-            meta.displayName(messageHelper.createComponent(knife.name));
+            meta.displayName(MessageHelper.createComponent(knife.name));
             meta.getPersistentDataContainer().set(knifeKey, PersistentDataType.BYTE, (byte) 1);
             if (meta instanceof Damageable) {
                 meta.setUnbreakable(true);

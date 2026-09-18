@@ -1,4 +1,4 @@
-package com.wolfdrache.murderknifes.manager;
+package com.wolfdrache.murderknifes;
 
 import java.io.File;
 import java.util.List;
@@ -14,10 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import com.wolfdrache.murderknifes.models.Knife;
-import com.wolfdrache.murderknifes.models.KnifePlayer;
-
-public class FileManager {
+class FileManager {
     // private final MurderKnifes plugin;
 
     private final File knifesFile;

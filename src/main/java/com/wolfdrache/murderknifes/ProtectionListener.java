@@ -1,4 +1,4 @@
-package com.wolfdrache.murderknifes.listener;
+package com.wolfdrache.murderknifes;
 
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.event.EventHandler;
@@ -6,11 +6,11 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.wolfdrache.murderknifes.manager.KnifeManager;
-
-public class ProtectionListener implements Listener {
+class ProtectionListener implements Listener {
     private final KnifeManager knifeManager;
 
     public ProtectionListener(KnifeManager knifeManager) {
@@ -32,5 +32,15 @@ public class ProtectionListener implements Listener {
         if (knifeManager.isCustomKnife(item)) {
             event.setCancelled(true);
         }
+    }
+
+    @EventHandler 
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        knifeManager.loadKnifePlayer(event.getPlayer());
+    }
+
+    @EventHandler 
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        knifeManager.saveKnifePlayer(event.getPlayer());
     }
 }

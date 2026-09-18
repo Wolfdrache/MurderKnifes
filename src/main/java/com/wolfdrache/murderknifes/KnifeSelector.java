@@ -1,4 +1,4 @@
-package com.wolfdrache.murderknifes.ui;
+package com.wolfdrache.murderknifes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,16 +16,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.wolfdrache.murderknifes.helper.ItemHelper;
-import com.wolfdrache.murderknifes.helper.MessageHelper;
-import com.wolfdrache.murderknifes.manager.CoinManager;
-import com.wolfdrache.murderknifes.manager.KnifeManager;
-import com.wolfdrache.murderknifes.models.Knife;
-import com.wolfdrache.murderknifes.models.KnifePlayer;
-
 import net.kyori.adventure.text.Component;
 
-public class KnifeSelector implements Listener {
+class KnifeSelector implements Listener {
     private final String allKnifesPermission = "murderknifes.allKnifes";
 
     private static class Data {
@@ -42,9 +35,6 @@ public class KnifeSelector implements Listener {
     private final KnifeManager knifeManager;
     private final CoinManager coinManager;
 
-    private final MessageHelper messageHelper = new MessageHelper();
-    private final ItemHelper itemHelper = new ItemHelper();
-
     private final Map<Player, Data> playerDataMap = new HashMap<>();
 
     private final List<Integer> freeSlots = new ArrayList<>(List.of(
@@ -53,8 +43,8 @@ public class KnifeSelector implements Listener {
         28, 29, 30, 31, 32, 33, 34,
         37, 38, 39, 40, 41, 42, 43)
     );
-    private final ItemStack nextArrow = itemHelper.createNextArrow(true);
-    private final ItemStack previousArrow = itemHelper.createNextArrow(false);
+    private final ItemStack nextArrow = ItemHelper.createNextArrow(true);
+    private final ItemStack previousArrow = ItemHelper.createNextArrow(false);
 
     private final int maxPages;
 
@@ -77,10 +67,10 @@ public class KnifeSelector implements Listener {
     }
 
     private void open(Player player, int page) {
-        Inventory gui = Bukkit.createInventory(null, 54, messageHelper.createComponent("§cMesser Auswahl: " + (page + 1)));
+        Inventory gui = Bukkit.createInventory(null, 54, MessageHelper.createComponent("§cMesser Auswahl: " + (page + 1)));
         for (int i = 0; i < gui.getSize(); i++) {
             if (!freeSlots.contains(i)) {
-                gui.setItem(i, itemHelper.createFillerItem(Material.RED_STAINED_GLASS_PANE));
+                gui.setItem(i, ItemHelper.createFillerItem(Material.RED_STAINED_GLASS_PANE));
             }
         }
 
@@ -102,11 +92,11 @@ public class KnifeSelector implements Listener {
             ItemStack item = knifeManager.createKnifeItem(knife);
             List<Component> lore = new ArrayList<>();
             if (knifePlayer.favoriteKnifes.contains(knife)) {
-                lore.add(messageHelper.createComponent("§aFavorit"));
+                lore.add(MessageHelper.createComponent("§aFavorit"));
             } else if (knifePlayer.boughtKnifes.contains(knife) || player.hasPermission(allKnifesPermission)) {
-                lore.add(messageHelper.createComponent("§eGekauft"));
+                lore.add(MessageHelper.createComponent("§eGekauft"));
             } else {
-                lore.add(messageHelper.createComponent("§cPreis: " + knife.price + " §6Coins"));
+                lore.add(MessageHelper.createComponent("§cPreis: §6" + knife.price + " Coins"));
             }
             ItemMeta meta = item.getItemMeta();
             meta.lore(lore);

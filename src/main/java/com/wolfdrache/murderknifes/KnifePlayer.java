@@ -1,4 +1,4 @@
-package com.wolfdrache.murderknifes.models;
+package com.wolfdrache.murderknifes;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class KnifePlayer {
+class KnifePlayer {
     public final Set<Knife> favoriteKnifes = new HashSet<>();
     public final Set<Knife> boughtKnifes = new HashSet<>();
 

@@ -1,12 +1,10 @@
-package com.wolfdrache.murderknifes.manager;
+package com.wolfdrache.murderknifes;
 
 import org.bukkit.entity.Player;
 
-import com.wolfdrache.murderknifes.models.Knife;
-
 import net.milkbowl.vault.economy.Economy;
 
-public class CoinManager {
+class CoinManager {
     private final Economy economy;
 
     public CoinManager(Economy economy) {

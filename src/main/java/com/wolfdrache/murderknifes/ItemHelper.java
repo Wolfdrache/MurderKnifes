@@ -1,30 +1,29 @@
-package com.wolfdrache.murderknifes.helper;
+package com.wolfdrache.murderknifes;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class ItemHelper {
-    private final MessageHelper messageHelper = new MessageHelper();
+class ItemHelper {
 
-    public ItemStack createFillerItem(Material material) {
+    public static ItemStack createFillerItem(Material material) {
         ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
         if (meta != null) {
-            meta.displayName(messageHelper.createComponent(" "));
+            meta.displayName(MessageHelper.createComponent(" "));
             item.setItemMeta(meta);
         }
         return item;
     }
 
-    public ItemStack createNextArrow(boolean next) {
+    public static ItemStack createNextArrow(boolean next) {
         ItemStack item = new ItemStack(Material.ARROW);
         ItemMeta meta = item.getItemMeta();
         if (meta != null) {
             if (next) {
-                meta.displayName(messageHelper.createComponent("§aNexte Seite"));
+                meta.displayName(MessageHelper.createComponent("§aNexte Seite"));
             } else {
-                meta.displayName(messageHelper.createComponent("§aVorherige Seite"));
+                meta.displayName(MessageHelper.createComponent("§aVorherige Seite"));
             }
             item.setItemMeta(meta);
         }

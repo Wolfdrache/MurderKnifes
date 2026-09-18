@@ -1,8 +1,8 @@
-package com.wolfdrache.murderknifes.models;
+package com.wolfdrache.murderknifes;
 
 import org.bukkit.Material;
 
-public class Knife {
+class Knife {
     public final String name;
     public final Material material;
     public final int price;

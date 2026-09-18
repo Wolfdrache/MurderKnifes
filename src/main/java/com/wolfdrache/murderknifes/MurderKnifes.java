@@ -6,17 +6,11 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.wolfdrache.murderknifes.api.MurderKnfesAPI;
-import com.wolfdrache.murderknifes.listener.ConnectionListener;
-import com.wolfdrache.murderknifes.listener.ProtectionListener;
-import com.wolfdrache.murderknifes.manager.CoinManager;
-import com.wolfdrache.murderknifes.manager.FileManager;
-import com.wolfdrache.murderknifes.manager.KnifeManager;
-import com.wolfdrache.murderknifes.ui.KnifeSelector;
+import com.wolfdrache.murderknifes.api.MurderKnifesAPI;
 
 import net.milkbowl.vault.economy.Economy;
 
-class MurderKnifes extends JavaPlugin implements MurderKnfesAPI {
+class MurderKnifes extends JavaPlugin implements MurderKnifesAPI {
 
     private Economy economy;
 
@@ -33,7 +27,7 @@ class MurderKnifes extends JavaPlugin implements MurderKnfesAPI {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
-        getServer().getServicesManager().register(MurderKnfesAPI.class, this, this, ServicePriority.Normal); 
+        getServer().getServicesManager().register(MurderKnifesAPI.class, this, this, ServicePriority.Normal); 
 
         fileManager = new FileManager(this);
         coinManager = new CoinManager(economy);
@@ -42,7 +36,6 @@ class MurderKnifes extends JavaPlugin implements MurderKnfesAPI {
         knifeSelector = new KnifeSelector(knifeManager, coinManager); 
 
         getServer().getPluginManager().registerEvents(knifeSelector, this);
-        getServer().getPluginManager().registerEvents(new ConnectionListener(knifeManager), this);
         getServer().getPluginManager().registerEvents(new ProtectionListener(knifeManager), this);
         
         getLogger().info("MurderKnifes has been enabled!");
