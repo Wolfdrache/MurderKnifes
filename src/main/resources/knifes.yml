@@ -1,0 +1,5 @@
+knifes:
+  name: "Rostiges Messer"
+  material: NETHERITE_SWORD
+  price: 2500
+  number: 1
