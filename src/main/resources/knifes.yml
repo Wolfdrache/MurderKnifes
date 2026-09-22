@@ -1,5 +1,9 @@
 knifes:
-  name: "Rostiges Messer"
-  material: NETHERITE_SWORD
-  price: 2500
-  number: 1
+  - name: "Rostiges Messer"
+    material: NETHERITE_SWORD
+    price: 2500
+    number: 1
+  - name: "Poseidons Dreizack"
+    material: TRIDENT
+    price: 5000
+    number: 2
