@@ -48,18 +48,15 @@ class FileManager {
         List<Integer> favoriteKnifeNumbers = config.getIntegerList(playerId + ".favoriteKnifes");
         Set<Knife> favoriteKnifes = new HashSet<>();
         for (Knife knife : knifes) {
-            if (favoriteKnifeNumbers.contains(knife.number) || knife.price == -1) {
+            if (favoriteKnifeNumbers.contains(knife.number)) {
                 favoriteKnifes.add(knife);
             }
         }
         List<Integer> boughtKnifeNumbers = config.getIntegerList(playerId + ".boughtKnifes");
         Set<Knife> boughtKnifes = new HashSet<>();
-        for (int number : boughtKnifeNumbers) {
-            for (Knife knife : knifes) {
-                if (knife.number == number) {
-                    boughtKnifes.add(knife);
-                    break;
-                }
+        for (Knife knife : knifes) {
+            if (knife.price == -1 || boughtKnifeNumbers.contains(knife.number)) {
+                boughtKnifes.add(knife);
             }
         }
         return new KnifePlayer(favoriteKnifes, boughtKnifes);
