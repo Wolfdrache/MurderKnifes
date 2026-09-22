@@ -10,7 +10,7 @@ import com.wolfdrache.murderknifes.api.MurderKnifesAPI;
 
 import net.milkbowl.vault.economy.Economy;
 
-class MurderKnifes extends JavaPlugin implements MurderKnifesAPI {
+public class MurderKnifes extends JavaPlugin implements MurderKnifesAPI {
 
     private Economy economy;
 
