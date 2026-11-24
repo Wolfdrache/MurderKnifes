@@ -1,5 +1,6 @@
 package com.wolfdrache.murderknifes;
 
+import com.wolfdrache.serverapi.coins.CoinService;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -8,11 +9,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.wolfdrache.murderknifes.api.MurderKnifesAPI;
 
-import net.milkbowl.vault.economy.Economy;
-
 public class MurderKnifes extends JavaPlugin implements MurderKnifesAPI {
 
-    private Economy economy;
+    private CoinService coinService;
 
     private CoinManager coinManager;
     private FileManager fileManager;
@@ -22,15 +21,13 @@ public class MurderKnifes extends JavaPlugin implements MurderKnifesAPI {
 
     @Override
     public void onEnable(){
-        if (!setupEconomy()) {
-            getLogger().severe("Vault not found! Disabling plugin.");
-            getServer().getPluginManager().disablePlugin(this);
-            return;
-        }
-        getServer().getServicesManager().register(MurderKnifesAPI.class, this, this, ServicePriority.Normal); 
+
+        coinService = setupService(CoinService.class);
+
+        getServer().getServicesManager().register(MurderKnifesAPI.class, this, this, ServicePriority.Normal);
 
         fileManager = new FileManager(this);
-        coinManager = new CoinManager(economy);
+        coinManager = new CoinManager(coinService);
         knifeManager = new KnifeManager(fileManager); 
 
         knifeSelector = new KnifeSelector(knifeManager, coinManager); 
@@ -46,18 +43,15 @@ public class MurderKnifes extends JavaPlugin implements MurderKnifesAPI {
         getLogger().info("MurderKnifes has been disabled!");
     }
 
-    private boolean setupEconomy() {
-        if (getServer().getPluginManager().getPlugin("Vault") == null) {
-            return false;
-        }
+    private <T> T setupService(Class<T> serviceClass) {
+        RegisteredServiceProvider<T> rsp =
+                getServer().getServicesManager().getRegistration(serviceClass);
 
-        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
         if (rsp == null) {
-            return false;
+            return null;
         }
 
-        economy = rsp.getProvider();
-        return true;
+        return rsp.getProvider();
     }
 
     @Override 

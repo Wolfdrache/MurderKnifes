@@ -58,9 +58,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.MilkBowl</groupId>
-            <artifactId>VaultAPI</artifactId>
-            <version>1.7</version>
+            <groupId>com.github.Wolfdrache.Party</groupId>
+            <artifactId>party-api</artifactId>
+            <version>135bd3e10c</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

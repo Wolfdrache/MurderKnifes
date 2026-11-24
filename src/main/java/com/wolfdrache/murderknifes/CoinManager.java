@@ -1,20 +1,18 @@
 package com.wolfdrache.murderknifes;
 
+import com.wolfdrache.serverapi.coins.CoinService;
 import org.bukkit.entity.Player;
 
-import net.milkbowl.vault.economy.Economy;
-
 class CoinManager {
-    private final Economy economy;
+    private final CoinService coinService;
 
-    public CoinManager(Economy economy) {
-        this.economy = economy;
+    public CoinManager(CoinService coinService) {
+        this.coinService = coinService;
     }
 
     public boolean tryBuyKnife(Player player, Knife clickedKnife) {
-        if (economy.getBalance(player) >= clickedKnife.price) {
-            economy.withdrawPlayer(player, clickedKnife.price);
-            return true;
+        if (coinService.hasEnoughCoins(player, clickedKnife.price)) {
+            return coinService.spentCoins(player, clickedKnife.price);
         }
         return false;
     }
